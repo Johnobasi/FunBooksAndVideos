@@ -22,11 +22,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\FunBooksAndVideos.Api\FunBooksAndVideos.Api.csproj" />
-    <ProjectReference Include="..\..\src\FunBooksAndVideos.Application\FunBooksAndVideos.Application.csproj" />
-    <ProjectReference Include="..\..\src\FunBooksAndVideos.Domain\FunBooksAndVideos.Domain.csproj" />
-    <ProjectReference Include="..\..\src\FunBooksAndVideos.Infrastructure\FunBooksAndVideos.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

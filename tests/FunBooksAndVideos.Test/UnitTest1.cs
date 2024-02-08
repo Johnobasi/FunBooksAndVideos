@@ -1,4 +1,4 @@
-namespace FunBooksAndVideos.Api.Test
+namespace FunBooksAndVideos.Test
 {
     public class UnitTest1
     {
