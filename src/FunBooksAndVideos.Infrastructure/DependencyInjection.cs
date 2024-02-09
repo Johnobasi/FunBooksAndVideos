@@ -13,6 +13,7 @@ namespace FunBooksAndVideos.Infrastructure
             services.AddScoped<IShippingSlipService, ShippingSlipService>();
             services.AddScoped<IMembershipActivationService, MembershipActivationService>();
             services.AddScoped<ICustomerServices, CustomerService>();
+            services.AddScoped<IShippingSlip, ShippingService > ();
             
             services.AddDbContext<ApplicationDbContext>(options =>
                            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));

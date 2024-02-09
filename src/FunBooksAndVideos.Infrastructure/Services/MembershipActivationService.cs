@@ -1,4 +1,5 @@
-﻿using FunBooksAndVideos.Domain.Entities;
+﻿using FunBooksAndVideos.Domain.Dtos;
+using FunBooksAndVideos.Domain.Entities;
 using FunBooksAndVideos.Domain.Enum;
 using FunBooksAndVideos.Domain.Interfaces;
 
@@ -11,9 +12,9 @@ namespace FunBooksAndVideos.Infrastructure.Services
         {
             _customerServices = customerServices;
         }
-        public async Task ActivateMembership(string customerId, MembershipType membershipType)
+        public async Task ActivateMembership(PurchaseOrderRequetDto purchase)
         {
-            Customer customer = await _customerServices.GetCustomerById(customerId);
+            Customer customer = await _customerServices.GetCustomerById(purchase.CustomerId.ToString());
             if (customer == null)
             {
                 throw new Exception("Customer not found");
@@ -24,15 +25,30 @@ namespace FunBooksAndVideos.Infrastructure.Services
                 throw new Exception("Customer is already a member");
             }
 
-            if (membershipType != MembershipType.None)
+            // Activate only one membership at a time
+            var validMembershipTypes = Enum.GetValues(typeof(MembershipType))
+                .Cast<MembershipType>()
+                .Where(mt => mt != MembershipType.None);
+
+            var validMembershipType = purchase.ItemLines
+                .Select(itemLine => itemLine.MembershipType)
+                .FirstOrDefault(validMembershipTypes.Contains);
+
+            if (validMembershipType != MembershipType.None)
             {
                 customer.Membership = new Membership
                 {
-                    MembershipType = membershipType,
-                    Id = Guid.NewGuid()
+                    MembershipType = validMembershipType,
+                    Id = Guid.NewGuid(),
+                    CustomerId = customer.Id,
+                    Customer = customer
                 };
+
+
+                // Update customer
+                await _customerServices.UpdateCustomer(customer);
             }
-            await _customerServices.UpdateCustomer(customer);
-        }   
+
+        }
     }
 }

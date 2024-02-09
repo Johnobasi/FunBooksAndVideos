@@ -1,4 +1,6 @@
 ﻿using FunBooksAndVideos.Application.Features.Queries;
+using FunBooksAndVideos.Domain.Entities;
+using FunBooksAndVideos.Domain.Enum;
 using FunBooksAndVideos.Domain.Interfaces;
 using MediatR;
 
@@ -14,8 +16,8 @@ namespace FunBooksAndVideos.Application.Features.Handlers
         }
         public async Task<bool> Handle(ActivateCustomerAccountQuery request, CancellationToken cancellationToken)
         {
-            var requestObject = request.PurchaseOrders; 
-            await _membershipActivationService.ActivateMembership(requestObject.CustomerId.ToString(), requestObject.Membership.MembershipType);
+            var requestObject = request.PurchaseOrders;            
+            await _membershipActivationService.ActivateMembership(requestObject);
 
             return true;
             

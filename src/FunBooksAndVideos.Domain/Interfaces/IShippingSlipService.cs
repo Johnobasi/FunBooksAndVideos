@@ -1,7 +1,9 @@
-﻿namespace FunBooksAndVideos.Domain.Interfaces
+﻿using FunBooksAndVideos.Domain.Dtos;
+
+namespace FunBooksAndVideos.Domain.Interfaces
 {
     public interface IShippingSlipService
     {
-        Task GenerateShippingSlip(string customerId, string productType);
+        Task GenerateShippingSlip(PurchaseOrderRequetDto purchaseOrder);
     }
 }

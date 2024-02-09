@@ -1,9 +1,9 @@
-﻿using FunBooksAndVideos.Domain.Enum;
+﻿using FunBooksAndVideos.Domain.Dtos;
 
 namespace FunBooksAndVideos.Domain.Interfaces
 {
     public interface IMembershipActivationService
     {
-        Task ActivateMembership(string customerId, MembershipType membershipType);
+        Task ActivateMembership(PurchaseOrderRequetDto purchase);
     }
 }

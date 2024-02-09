@@ -17,5 +17,6 @@ namespace FunBooksAndVideos.Infrastructure
         public DbSet<ItemLine> ItemLines { get; set; }
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<ShippingSlip> ShippingSlips { get; set; }
     }
 }
