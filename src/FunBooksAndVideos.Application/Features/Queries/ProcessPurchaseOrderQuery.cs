@@ -4,10 +4,10 @@ using MediatR;
 
 namespace FunBooksAndVideos.Application.Features.Queries
 {
-    public class ActivateCustomerAccountQuery : IRequest<bool>
+    public class ProcessPurchaseOrderQuery : IRequest<bool>
     {
         public PurchaseOrderRequetDto PurchaseOrders { get; set; }
-        public ActivateCustomerAccountQuery(PurchaseOrderRequetDto purchaseOrder)
+        public ProcessPurchaseOrderQuery(PurchaseOrderRequetDto purchaseOrder)
         {
             PurchaseOrders = purchaseOrder;
         }

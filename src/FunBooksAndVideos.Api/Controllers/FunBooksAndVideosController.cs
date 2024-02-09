@@ -19,7 +19,7 @@ namespace FunBooksAndVideos.Api.Controllers
 
 
         [HttpPost("ProcessCustomerPurchaseOrder")]
-        public async Task<IActionResult> ProcessCustomer([FromBody] ActivateCustomerAccountQuery request)
+        public async Task<IActionResult> ProcessCustomer([FromBody] ProcessPurchaseOrderQuery request)
         {
             _logger.LogInformation("ProcessCustomerPurchaseOrder completed");
             var result = await _mediator.Send(request);         

@@ -6,16 +6,16 @@ using MediatR;
 namespace FunBooksAndVideos.Application.Features.Handlers
 {
 
-    public class ActivateCustomerAccountHandler : IRequestHandler<ActivateCustomerAccountQuery, bool>
+    public class ProcessPurchaseOrderHandler : IRequestHandler<ProcessPurchaseOrderQuery, bool>
     {
         private readonly IMembershipActivationService _membershipActivationService;
         private readonly IShippingSlipService _shippingSlipService;
-        public ActivateCustomerAccountHandler(IMembershipActivationService membershipActivationService, IShippingSlipService shippingSlipService)
+        public ProcessPurchaseOrderHandler(IMembershipActivationService membershipActivationService, IShippingSlipService shippingSlipService)
         {
             _membershipActivationService = membershipActivationService;
             _shippingSlipService = shippingSlipService;
         }
-        public async Task<bool> Handle(ActivateCustomerAccountQuery request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(ProcessPurchaseOrderQuery request, CancellationToken cancellationToken)
         {
             var requestObject = request.PurchaseOrders;
             if (requestObject !=null)
