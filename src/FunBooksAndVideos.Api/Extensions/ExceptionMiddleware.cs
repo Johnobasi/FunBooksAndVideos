@@ -36,7 +36,7 @@ namespace FunBooksAndVideos.Api.Extensions
                     }                   
                 };
                 var result = JsonConvert.SerializeObject(problem);
-                context.Response.ContentType = "application/problem+json";
+                context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(result);
 
             }

@@ -1,5 +1,4 @@
 ﻿using FunBooksAndVideos.Domain.Enum;
-using System.Text.Json.Serialization;
 
 namespace FunBooksAndVideos.Domain.Entities
 {
