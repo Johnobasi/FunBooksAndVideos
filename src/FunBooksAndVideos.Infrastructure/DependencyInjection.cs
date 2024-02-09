@@ -10,9 +10,10 @@ namespace FunBooksAndVideos.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IShippingSlipService, ShippingSlipService>();
-            services.AddTransient<IMembershipActivationService, MembershipActivationService>();
-
+            services.AddScoped<IShippingSlipService, ShippingSlipService>();
+            services.AddScoped<IMembershipActivationService, MembershipActivationService>();
+            services.AddScoped<ICustomerServices, CustomerService>();
+            
             services.AddDbContext<ApplicationDbContext>(options =>
                            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             return services;

@@ -1,4 +1,5 @@
 ﻿using FunBooksAndVideos.Domain.Entities;
+using FunBooksAndVideos.Domain.Enum;
 using FunBooksAndVideos.Domain.Interfaces;
 
 namespace FunBooksAndVideos.Infrastructure.Services
@@ -10,26 +11,28 @@ namespace FunBooksAndVideos.Infrastructure.Services
         {
             _customerServices = customerServices;
         }
-        public async Task ActivateMembership(string customerId, string membershipType)
+        public async Task ActivateMembership(string customerId, MembershipType membershipType)
         {
             Customer customer = await _customerServices.GetCustomerById(customerId);
-            ActivateMembershipForCustomer(customer, membershipType);
-           await _customerServices.UpdateCustomer(customer);
-        }
-
-        private void ActivateMembershipForCustomer(Customer customer, string membershipType)
-        {
-            customer.IsMember = true;
-            // Activate membership
-
-            if(membershipType == "BookClub")
+            if (customer == null)
             {
-                // Activate book club membership
+                throw new Exception("Customer not found");
             }
-            else if (membershipType == "VideoClub")
+
+            if (customer.IsMember)
             {
-                // Activate video club membership
+                throw new Exception("Customer is already a member");
             }
-        }
+
+            if (membershipType != MembershipType.None)
+            {
+                customer.Membership = new Membership
+                {
+                    MembershipType = membershipType,
+                    Id = Guid.NewGuid()
+                };
+            }
+            await _customerServices.UpdateCustomer(customer);
+        }   
     }
 }
