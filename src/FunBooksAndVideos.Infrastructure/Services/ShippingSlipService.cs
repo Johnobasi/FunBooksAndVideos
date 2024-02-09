@@ -16,20 +16,26 @@ namespace FunBooksAndVideos.Infrastructure.Services
 
         public async Task GenerateShippingSlip(PurchaseOrderRequetDto purchaseOrder)
         {
-            foreach (var itemLine in purchaseOrder.ItemLines)
-            {
-                if (IsPhysicalProduct(itemLine.ProductType))
-                {
-                    var shippingSlip = new ShippingSlip
-                    {
-                        CustomerId = purchaseOrder.CustomerId.ToString(),
-                        ProductType = itemLine.ProductType.ToString(),
-                        ShippingDate = DateTime.UtcNow
-                    };
+            // filter out the physical products and generate shipping slip
+            var validproductTypes = Enum.GetValues(typeof(ProductTypes))
+                .Cast<ProductTypes>()
+                .Where(mt => mt != ProductTypes.None);
 
-                    await _shippingSlip.AddShippingSlip(shippingSlip);
-                    PrintShippingSlip(shippingSlip);
-                }
+            var validproductType = purchaseOrder.ItemLines
+                .Select(itemLine => itemLine.ProductType)
+                .FirstOrDefault(validproductTypes.Contains);
+
+            if (validproductType != ProductTypes.None)
+            {
+                var shippingSlip = new ShippingSlip
+                {
+                    CustomerId = purchaseOrder.CustomerId.ToString(),
+                    ProductType = validproductType,
+                    ShippingDate = DateTime.UtcNow
+                };
+
+                await _shippingSlip.AddShippingSlip(shippingSlip);
+                PrintShippingSlip(shippingSlip);
             }
         }
 
@@ -42,18 +48,6 @@ namespace FunBooksAndVideos.Infrastructure.Services
             Console.WriteLine($"Product Type: {shippingSlip.ProductType}");
             Console.WriteLine($"Shipping Date: {shippingSlip.ShippingDate}");
             Console.WriteLine("===============================================");
-        }
-
-        private bool IsPhysicalProduct(ProductTypes productType)
-        {
-            foreach (ProductTypes physicalProductType in Enum.GetValues(typeof(ProductTypes)))
-            {
-                if (physicalProductType == productType)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
         #endregion
     }

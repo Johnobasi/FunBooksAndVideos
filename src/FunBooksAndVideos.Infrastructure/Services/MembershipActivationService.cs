@@ -25,7 +25,7 @@ namespace FunBooksAndVideos.Infrastructure.Services
                 throw new Exception("Customer is already a member");
             }
 
-            // Activate only one membership at a time
+           //filter out the membership type coming from the purchase order and activate membership
             var validMembershipTypes = Enum.GetValues(typeof(MembershipType))
                 .Cast<MembershipType>()
                 .Where(mt => mt != MembershipType.None);
@@ -34,6 +34,7 @@ namespace FunBooksAndVideos.Infrastructure.Services
                 .Select(itemLine => itemLine.MembershipType)
                 .FirstOrDefault(validMembershipTypes.Contains);
 
+            // Activate only one membership at a time
             if (validMembershipType != MembershipType.None)
             {
                 customer.Membership = new Membership

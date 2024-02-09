@@ -18,13 +18,13 @@ namespace FunBooksAndVideos.Api.Controllers
         }
 
 
-        [HttpPost("ActivateCustomerAccount")]
-        public async Task<IActionResult> ActivateCustomerAccount([FromBody] ActivateCustomerAccountQuery request)
+        [HttpPost("ProcessCustomerPurchaseOrder")]
+        public async Task<IActionResult> ProcessCustomer([FromBody] ActivateCustomerAccountQuery request)
         {
             var result = await _mediator.Send(request);
             var resultJson = JsonConvert.SerializeObject(result);
 
-            _logger.LogInformation($"ActivateCustomerAccount completed. Result: {resultJson}");
+            _logger.LogInformation($"ProcessCustomerPurchaseOrder completed. Result: {resultJson}");
             return Ok(result);
         }
     }
