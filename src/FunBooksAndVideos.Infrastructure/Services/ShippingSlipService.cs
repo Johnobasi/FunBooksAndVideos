@@ -16,7 +16,7 @@ namespace FunBooksAndVideos.Infrastructure.Services
 
         public async Task GenerateShippingSlip(PurchaseOrderRequetDto purchaseOrder)
         {
-            // filter out the physical products and generate shipping slip
+            // filter out the physical products 
             var validproductTypes = Enum.GetValues(typeof(ProductTypes))
                 .Cast<ProductTypes>()
                 .Where(mt => mt != ProductTypes.None);
@@ -34,7 +34,10 @@ namespace FunBooksAndVideos.Infrastructure.Services
                     ShippingDate = DateTime.UtcNow
                 };
 
+                //persist shipping slip to the database
                 await _shippingSlip.AddShippingSlip(shippingSlip);
+
+                //print shipping slip
                 PrintShippingSlip(shippingSlip);
             }
         }

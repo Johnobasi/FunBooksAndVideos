@@ -1,6 +1,7 @@
 ﻿using FunBooksAndVideos.Domain.Dtos;
 using FunBooksAndVideos.Domain.Entities;
 using FunBooksAndVideos.Domain.Enum;
+using FunBooksAndVideos.Domain.Exceptions;
 using FunBooksAndVideos.Domain.Interfaces;
 
 namespace FunBooksAndVideos.Infrastructure.Services
@@ -17,39 +18,38 @@ namespace FunBooksAndVideos.Infrastructure.Services
             Customer customer = await _customerServices.GetCustomerById(purchase.CustomerId.ToString());
             if (customer == null)
             {
-                throw new Exception("Customer not found");
+                throw new NotFoundException("Customer not found");
             }
 
             if (customer.IsMember)
             {
-                throw new Exception("Customer is already a member");
+                throw new InvalidOperationExceptions("Customer is already a member");
             }
 
-           //filter out the membership type coming from the purchase order and activate membership
             var validMembershipTypes = Enum.GetValues(typeof(MembershipType))
-                .Cast<MembershipType>()
-                .Where(mt => mt != MembershipType.None);
-
-            var validMembershipType = purchase.ItemLines
-                .Select(itemLine => itemLine.MembershipType)
-                .FirstOrDefault(validMembershipTypes.Contains);
-
-            // Activate only one membership at a time
-            if (validMembershipType != MembershipType.None)
+                            .Cast<MembershipType>()
+                                .Where(mt => mt != MembershipType.None);
+            
+            foreach (var itemLine in purchase.ItemLines)
             {
-                customer.Membership = new Membership
+                if (validMembershipTypes.Contains(itemLine.MembershipType))
                 {
-                    MembershipType = validMembershipType,
-                    Id = Guid.NewGuid(),
-                    CustomerId = customer.Id,
-                    Customer = customer
-                };
+                    // Activate membership for each valid type found
+                    customer.Membership = new Membership
+                    {
+                        MembershipType = itemLine.MembershipType,
+                        Id = Guid.NewGuid(),
+                        CustomerId = customer.Id,
+                        Customer = customer
+                    };
+                }
+            }
 
-
-                // Update customer
+            //update customer only if memberships are activated
+            if (customer.Membership != null )
+            {
                 await _customerServices.UpdateCustomer(customer);
             }
-
         }
     }
 }

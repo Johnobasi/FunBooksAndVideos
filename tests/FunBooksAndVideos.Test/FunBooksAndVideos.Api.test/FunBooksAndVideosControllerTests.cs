@@ -13,13 +13,13 @@ namespace FunBooksAndVideos.Api.test
     public class FunBooksAndVideosControllerTests
     {
         private readonly Mock<IMediator> _mediator;
-        private readonly Mock<ILogger<FunBooksAndVideosController>> _logger;
-        private readonly FunBooksAndVideosController _controller;
+        private readonly Mock<ILogger<ProcessPurchaseOrderController>> _logger;
+        private readonly ProcessPurchaseOrderController _controller;
         public FunBooksAndVideosControllerTests()
         {
             _mediator = new Mock<IMediator>();
-            _logger = new Mock<ILogger<FunBooksAndVideosController>>();
-            _controller = new FunBooksAndVideosController(_mediator.Object, _logger.Object);
+            _logger = new Mock<ILogger<ProcessPurchaseOrderController>>();
+            _controller = new ProcessPurchaseOrderController(_mediator.Object, _logger.Object);
         }
 
         [Fact]

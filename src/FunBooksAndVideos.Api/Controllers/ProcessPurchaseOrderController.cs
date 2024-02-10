@@ -7,11 +7,11 @@ namespace FunBooksAndVideos.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FunBooksAndVideosController : ControllerBase
+    public class ProcessPurchaseOrderController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<FunBooksAndVideosController> _logger;
-        public FunBooksAndVideosController(IMediator mediator, ILogger<FunBooksAndVideosController> logger)
+        private readonly ILogger<ProcessPurchaseOrderController> _logger;
+        public ProcessPurchaseOrderController(IMediator mediator, ILogger<ProcessPurchaseOrderController> logger)
         {
             _mediator = mediator;
             _logger = logger;
