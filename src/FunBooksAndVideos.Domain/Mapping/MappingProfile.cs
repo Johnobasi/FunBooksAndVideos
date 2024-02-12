@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FunBooksAndVideos.Domain.Dtos;
+using FunBooksAndVideos.Domain.Models;
 
 namespace FunBooksAndVideos.Domain.Mapping
 {
@@ -7,8 +8,8 @@ namespace FunBooksAndVideos.Domain.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<PurchaseOrderRequetDto, Entities.PurchaseOrder>().ReverseMap();
-            CreateMap<Entities.ItemLine, ItemLineDto>().ReverseMap();
+            CreateMap<PurchaseOrderRequetDto, PurchaseOrder>().ReverseMap();
+            CreateMap<ItemLine, ItemLineDto>().ReverseMap();
             CreateMap<Entities.Customer, UpdateCustomerDto>().ReverseMap();
         }
     }

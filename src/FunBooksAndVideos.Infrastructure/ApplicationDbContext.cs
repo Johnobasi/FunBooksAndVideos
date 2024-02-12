@@ -1,4 +1,5 @@
 ﻿using FunBooksAndVideos.Domain.Entities;
+using FunBooksAndVideos.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FunBooksAndVideos.Infrastructure

@@ -2,6 +2,7 @@
 using FunBooksAndVideos.Domain.Entities;
 using FunBooksAndVideos.Domain.Enum;
 using FunBooksAndVideos.Domain.Interfaces;
+using System.Text;
 
 namespace FunBooksAndVideos.Infrastructure.Services
 {
@@ -38,19 +39,32 @@ namespace FunBooksAndVideos.Infrastructure.Services
                 await _shippingSlip.AddShippingSlip(shippingSlip);
 
                 //print shipping slip
-                PrintShippingSlip(shippingSlip);
+                PrintShippingSlip(purchaseOrder);
             }
         }
 
         #region Private Methods
-        private void PrintShippingSlip(ShippingSlip shippingSlip)
+        private void PrintShippingSlip(PurchaseOrderRequetDto purchaseOrder)
         {
-            Console.WriteLine("========== Shipping Slip Information ==========");
-            Console.WriteLine("Shipping Slip Information:");
-            Console.WriteLine($"Customer ID: {shippingSlip.CustomerId}");
-            Console.WriteLine($"Product Type: {shippingSlip.ProductType}");
-            Console.WriteLine($"Shipping Date: {shippingSlip.ShippingDate}");
-            Console.WriteLine("===============================================");
+            StringBuilder shippingSlip = new StringBuilder();
+
+            shippingSlip.AppendLine("========== Shipping Slip Information ==========");
+
+            shippingSlip.AppendLine("Shipping Slip Information:");
+            shippingSlip.AppendLine($"Customer ID: {purchaseOrder.CustomerId}");
+            shippingSlip.AppendLine($"Product Type: {purchaseOrder!.ItemLines.FirstOrDefault()?.ProductType}");
+            shippingSlip.AppendLine($"Shipping Date: {DateTime.UtcNow}");
+            shippingSlip.AppendLine($"Purchase Order Id:{purchaseOrder.PurchaseOrderId}");
+            shippingSlip.AppendLine($"Total: {purchaseOrder.TotalPrice}");
+            shippingSlip.AppendLine("Item Lines");
+            foreach (var item in purchaseOrder.ItemLines)
+            {
+                shippingSlip.AppendLine($"Item Name: {item.Name}");
+                shippingSlip.AppendLine($"Product Type: {item.ProductType}");
+                shippingSlip.AppendLine($"Membership Type: {item.MembershipType}");
+            }
+
+            shippingSlip.AppendLine("===============================================");
         }
         #endregion
     }

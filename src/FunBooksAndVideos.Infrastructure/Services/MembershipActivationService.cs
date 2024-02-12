@@ -3,6 +3,7 @@ using FunBooksAndVideos.Domain.Entities;
 using FunBooksAndVideos.Domain.Enum;
 using FunBooksAndVideos.Domain.Exceptions;
 using FunBooksAndVideos.Domain.Interfaces;
+using FunBooksAndVideos.Domain.Models;
 
 namespace FunBooksAndVideos.Infrastructure.Services
 {

@@ -1,6 +1,6 @@
 ﻿using FunBooksAndVideos.Domain.Enum;
 
-namespace FunBooksAndVideos.Domain.Entities
+namespace FunBooksAndVideos.Domain.Models
 {
     public class ItemLine
     {

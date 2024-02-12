@@ -30,7 +30,7 @@ namespace FunBooksAndVideos.Api.test
                  (new Domain.Dtos.PurchaseOrderRequetDto
                  {
                      CustomerId = Guid.NewGuid(),
-                     PurchaseoRderId = Guid.NewGuid(),
+                     PurchaseOrderId = Guid.NewGuid(),
                      TotalPrice = 1,
                      ItemLines = new List<Domain.Dtos.ItemLineDto>
                      {
@@ -61,7 +61,7 @@ namespace FunBooksAndVideos.Api.test
                  (new Domain.Dtos.PurchaseOrderRequetDto
                  {
                      CustomerId = Guid.NewGuid(),
-                     PurchaseoRderId = Guid.NewGuid(),
+                     PurchaseOrderId = Guid.NewGuid(),
                      TotalPrice = 1,
                      ItemLines = new List<Domain.Dtos.ItemLineDto>
                      {

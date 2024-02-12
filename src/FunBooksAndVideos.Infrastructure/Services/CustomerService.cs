@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FunBooksAndVideos.Domain.Entities;
+using FunBooksAndVideos.Domain.Exceptions;
 using FunBooksAndVideos.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 
@@ -23,7 +24,7 @@ namespace FunBooksAndVideos.Infrastructure.Services
             if (customer == null)
             {
                 _logger.LogError($"Customer with id {customerId} not found");
-                throw new Exception($"Customer with id {customerId} not found");
+                throw new NotFoundException($"Customer with id {customerId} not found");
             }
             return customer;
         }

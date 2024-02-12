@@ -1,4 +1,5 @@
 ﻿using FunBooksAndVideos.Domain.Enum;
+using FunBooksAndVideos.Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FunBooksAndVideos.Domain.Entities
