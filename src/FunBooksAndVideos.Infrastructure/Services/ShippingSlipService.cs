@@ -51,11 +51,11 @@ namespace FunBooksAndVideos.Infrastructure.Services
             shippingSlip.AppendLine("========== Shipping Slip Information ==========");
 
             shippingSlip.AppendLine("Shipping Slip Information:");
+
             shippingSlip.AppendLine($"Customer ID: {purchaseOrder.CustomerId}");
-            shippingSlip.AppendLine($"Product Type: {purchaseOrder!.ItemLines.FirstOrDefault()?.ProductType}");
-            shippingSlip.AppendLine($"Shipping Date: {DateTime.UtcNow}");
             shippingSlip.AppendLine($"Purchase Order Id:{purchaseOrder.PurchaseOrderId}");
             shippingSlip.AppendLine($"Total: {purchaseOrder.TotalPrice}");
+            
             shippingSlip.AppendLine("Item Lines");
             foreach (var item in purchaseOrder.ItemLines)
             {

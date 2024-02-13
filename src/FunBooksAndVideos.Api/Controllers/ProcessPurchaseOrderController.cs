@@ -1,7 +1,6 @@
 ﻿using FunBooksAndVideos.Application.Features.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace FunBooksAndVideos.Api.Controllers
 {

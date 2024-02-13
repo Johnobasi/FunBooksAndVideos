@@ -1,6 +1,7 @@
 using FunBooksAndVideos.Infrastructure;
 using FunBooksAndVideos.Application;
 using FunBooksAndVideos.Api.Extensions;
+using FunBooksAndVideos.Infrastructure.DbInitializer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,20 @@ builder.Services
 
 var app = builder.Build();
 
+//if(args.Length == 1 && args[0]?.ToLower()=="seeddata")
+//    SeedData(app);
+
+// //Seed Data
+//void SeedData(IHost app)
+//{
+//    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+//    using (var scope = scopedFactory!.CreateScope())
+//    {
+//        var service = scope.ServiceProvider.GetService<DataSeeder>();
+//        service?.SeedData();
+//    }
+//}
 app.UseMiddleware<ExceptionMiddleware>();
 if (app.Environment.IsDevelopment())
 {
