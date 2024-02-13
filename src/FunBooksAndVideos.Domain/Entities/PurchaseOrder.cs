@@ -1,4 +1,6 @@
-﻿namespace FunBooksAndVideos.Domain.Models
+﻿using FunBooksAndVideos.Domain.Models;
+
+namespace FunBooksAndVideos.Domain.Entities
 {
     public class PurchaseOrder
     {

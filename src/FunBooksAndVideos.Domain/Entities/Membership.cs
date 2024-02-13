@@ -1,8 +1,7 @@
-﻿using FunBooksAndVideos.Domain.Entities;
-using FunBooksAndVideos.Domain.Enum;
+﻿using FunBooksAndVideos.Domain.Enum;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FunBooksAndVideos.Domain.Models
+namespace FunBooksAndVideos.Domain.Entities
 {
     public class Membership
     {

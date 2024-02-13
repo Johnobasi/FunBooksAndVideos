@@ -1,4 +1,5 @@
-﻿using FunBooksAndVideos.Domain.Enum;
+﻿using FunBooksAndVideos.Domain.Entities;
+using FunBooksAndVideos.Domain.Enum;
 
 namespace FunBooksAndVideos.Domain.Models
 {

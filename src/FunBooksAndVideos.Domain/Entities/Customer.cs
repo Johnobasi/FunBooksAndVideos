@@ -1,5 +1,4 @@
-﻿using FunBooksAndVideos.Domain.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace FunBooksAndVideos.Domain.Entities

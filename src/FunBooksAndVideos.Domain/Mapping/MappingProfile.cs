@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FunBooksAndVideos.Domain.Dtos;
+using FunBooksAndVideos.Domain.Entities;
 using FunBooksAndVideos.Domain.Models;
 
 namespace FunBooksAndVideos.Domain.Mapping
